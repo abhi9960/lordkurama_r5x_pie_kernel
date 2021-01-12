@@ -1224,14 +1224,14 @@ static int rx_macro_mclk_ctrl(struct device *dev, bool enable)
 		ret = clk_prepare_enable(rx_priv->rx_core_clk);
 		if (ret < 0) {
 			dev_err_ratelimited(dev, "%s:rx mclk enable failed\n", __func__);
-			return ret;
+			goto exit;
 		}
 		ret = clk_prepare_enable(rx_priv->rx_npl_clk);
 		if (ret < 0) {
 			clk_disable_unprepare(rx_priv->rx_core_clk);
 			dev_err(dev, "%s:rx npl_clk enable failed\n",
 				__func__);
-			return ret;
+			goto exit;
 		}
 		if (rx_priv->rx_mclk_cnt++ == 0) {
 			if (rx_priv->dev_up)
@@ -1241,7 +1241,7 @@ static int rx_macro_mclk_ctrl(struct device *dev, bool enable)
 		if (rx_priv->rx_mclk_cnt <= 0) {
 			dev_dbg(dev, "%s:rx mclk already disabled\n", __func__);
 			rx_priv->rx_mclk_cnt = 0;
-			return 0;
+			goto exit;
 		}
 		if (--rx_priv->rx_mclk_cnt == 0) {
 			if (rx_priv->dev_up)
@@ -1250,9 +1250,9 @@ static int rx_macro_mclk_ctrl(struct device *dev, bool enable)
 		clk_disable_unprepare(rx_priv->rx_npl_clk);
 		clk_disable_unprepare(rx_priv->rx_core_clk);
 	}
-
+exit:
 	mutex_unlock(&rx_priv->clk_lock);
-	return 0;
+	return ret;
 }
 
 static int rx_macro_event_handler(struct snd_soc_codec *codec, u16 event,
