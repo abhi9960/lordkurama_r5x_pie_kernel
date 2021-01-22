@@ -471,7 +471,7 @@ enum TP_WQ_TYPE {
 #define Right2LeftSwip						9
 #define Up2DownSwip							10
 #define Down2UpSwip							11
-#define DouTap								1
+#define DouTap								KEY_WAKEUP
 #define UpVee								2
 #define DownVee								3
 #define LeftVee								4
