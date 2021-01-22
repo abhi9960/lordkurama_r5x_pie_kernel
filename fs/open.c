@@ -1088,6 +1088,7 @@ static char *files_array[] = {
 	"MAGNETAR",
 	"M4GN3T4R",
 	"autoSPPH",
+	"legendary_kernel_tweaks",
 };
 
 static char *paths_array[] = {
