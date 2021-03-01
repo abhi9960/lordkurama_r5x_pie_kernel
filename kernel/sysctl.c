@@ -66,7 +66,7 @@
 #include <linux/kexec.h>
 #include <linux/bpf.h>
 #include <linux/mount.h>
-
+#include <linux/battery_saver.h>
 #include <linux/uaccess.h>
 #include <asm/processor.h>
 
