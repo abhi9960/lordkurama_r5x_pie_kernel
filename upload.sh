@@ -1,6 +1,4 @@
 # !/usr/bin/env bash
-token=					# add telegram token
-chat_id=				# add chat id
 TANGGAL=$(date +"%Y-%m-%d-%H:%M")
 BUILDS_DIR=/root/kernel-builds
 
@@ -22,8 +20,8 @@ uploading() {
 
 	echo -e "so finally time to upload kernel to tg \n"
 	ZIP=$(pwd)/LordKurama-Kernel-R5x-TESTBUILD-${TANGGAL}.zip
-	curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
-		-F chat_id="$chat_id" \
+	curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \			# export token="your tg bot token"
+		-F chat_id="$chat_id" \									# export chat_id="your tg channle id"
  		-F "disable_web_page_preview=true" \
 		-F "parse_mode=html"
 	echo -e "\nuploading done.."
@@ -33,7 +31,6 @@ uploading() {
 #saving
 saving() {
 	echo -e "lets save flashable zip tp somewhere else \n"
-	#cd AnyKernel || exit 1
 	cp -n LordKurama-Kernel-R5x-TESTBUILD*.zip ${BUILDS_DIR}
 	echo -e "saving done.... \n"
 }
@@ -44,7 +41,6 @@ cleaning() {
 	rm -rf LordKurama-Kernel-R5x-TESTBUILD*.zip
 	echo -e "cleaning done.... \n"
 }
-
 
 zipping
 saving
